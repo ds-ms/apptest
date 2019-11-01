@@ -125,13 +125,13 @@ stages:
             displayName: 'kubectl get services'
             inputs:
               command: get
-              namespace: $(k8sNamespaceForPR)
+              namespace: $(k8sNamespaceForPR)-1
               arguments: svc
-              outputFormat: jsonpath='http://{.items[0].status.loadBalancer.ingress[0].ip}:{.items[0].spec.ports[0].port}'
+              outputFormat: jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}:{.items[0].spec.ports[0].port}'
           
           - script: |
               url="$(get.KubectlOutput)"
-              if [ ! -z "$url" ] 
+              if [ "$url" -ne ":"  ] 
               then
                 message="${message}<br><br>You can navigate to http://$url to test your changes"
               fi

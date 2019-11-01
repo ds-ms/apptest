@@ -123,6 +123,7 @@ stages:
           - task: Kubernetes@1
             name: get
             displayName: 'kubectl get services'
+            continueOnError: true
             inputs:
               command: get
               namespace: $(k8sNamespaceForPR)-1
@@ -131,7 +132,7 @@ stages:
           
           - script: |
               url="$(get.KubectlOutput)"
-              if [ "$url" -ne ":"  ] 
+              if [ "$url" -ne ":" -a ! -z "$url" ] 
               then
                 message="${message}<br><br>You can navigate to http://$url to test your changes"
               fi

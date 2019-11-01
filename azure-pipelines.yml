@@ -132,7 +132,7 @@ stages:
           
           - script: |
               url="$(get.KubectlOutput)"
-              if [ "$url" -ne ":" -a ! -z "$url" ] 
+              if [ "$url" != ":" -a ! -z "$url" ] 
               then
                 message="${message}<br><br>You can navigate to http://$url to test your changes"
               fi

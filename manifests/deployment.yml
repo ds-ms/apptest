@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: dsmsapptest 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dsmsapptest 
+    spec:
+      containers:
+        - name: dsmsapptest 
+          image: anshenormdev.azurecr.io/dsmsapptest
+          ports:
+          - containerPort: 80

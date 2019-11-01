@@ -132,6 +132,7 @@ stages:
           
           - script: |
               url="$(get.KubectlOutput)"
+              message="Yo! It's done"
               if [ "$url" != ":" -a ! -z "$url" ] 
               then
                 message="${message}<br><br>You can navigate to http://$url to test your changes"

@@ -129,7 +129,7 @@ stages:
               arguments: svc
           
           - script: |
-              ip=$(echo '$(get.KubectlOutput)' | python -c 'import json,sys;obj=json.load(sys.stdin); "" if (not len(obj["items"]) > 0) print obj["items"][0]["status"]["loadBalancer"]["ingress"]["ip"]+":"+obj["items"][0]["spec"]["ports"]["port"]' )
+              ip=$(echo '$(get.KubectlOutput)' | python3 -c 'import json,sys;obj=json.load(sys.stdin); "" if (not len(obj["items"]) > 0) print(obj["items"][0]["status"]["loadBalancer"]["ingress"]["ip"]+":"+obj["items"][0]["spec"]["ports"]["port"])' )
               message="Deployment to your review-app succeeded."
               if [ -n $ip ] 
               then
